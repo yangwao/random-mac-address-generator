@@ -25,6 +25,42 @@ for (let i = 0; i < finalMac.length; i++) {
   if (i % 2 === 1) finalMac[i] += ':'
 }
 
+const { spawn } = require('child_process')
+const ifconfig = spawn('ifconfig', ['en0'])
+const grep = spawn('grep', ['ether'])
+let realMac
+
+ifconfig.stdout.on('data', (data) => {
+  grep.stdin.write(data)
+})
+
+ifconfig.stderr.on('data', (data) => {
+  console.log(`ifconfig stderr: ${data}`)
+})
+
+ifconfig.on('close', (code) => {
+  if (code !== 0) {
+    console.log(`ifconfig process exited with code ${code}`)
+  }
+  grep.stdin.end()
+})
+
+grep.stdout.on('data', (data) => {
+      realMac = data.toString().split(" ")
+      console.log(realMac[1]);
+      })
+
+grep.stderr.on('data', (data) => {
+  console.log(`grep stderr: ${data}`)
+})
+
+grep.on('close', (code) => {
+  if (code !== 0) {
+    console.log(`grep process exited with code ${code}`)
+  }
+})
+
+
 console.log(`
   write down your real-own mac address. Run
   ⫸ ifconfig en0 | grep ether
@@ -35,5 +71,5 @@ console.log(`
   ⫸ networksetup -setairportpower en0 on
 `);
 
-let en0down = execSync('networksetup -setairportpower en0 off')
-let en0up = execSync('networksetup -setairportpower en0 on')
+// let en0down = execSync('networksetup -setairportpower en0 off')
+// let en0up = execSync('networksetup -setairportpower en0 on')
