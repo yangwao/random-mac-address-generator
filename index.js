@@ -25,7 +25,7 @@ for (let i = 0; i < finalMac.length; i++) {
 }
 
 console.log(`
-  note your real & own mac address. Run
+  write down your real-own mac address. Run
   ⫸ ifconfig en0 | grep ether
   Set new random mac *with real vendor*
   ⫸ sudo ifconfig en0 ether ${finalMac.join('').slice(0, -1)}
