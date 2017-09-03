@@ -1,5 +1,6 @@
-const fs = require('fs')
+const { execSync } = require('child_process');
 
+const fs = require('fs')
 const mac = fs.readFileSync('oui-mac.txt', 'utf8')
 const macArray = mac.split("\n")
 let validVendorMacs = []
@@ -33,3 +34,6 @@ console.log(`
   ⫸ networksetup -setairportpower en0 off
   ⫸ networksetup -setairportpower en0 on
 `);
+
+let en0down = execSync('networksetup -setairportpower en0 off')
+let en0up = execSync('networksetup -setairportpower en0 on')
