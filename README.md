@@ -4,13 +4,16 @@ I've just been bored in Flixbus going from Vienna, so I made another random mac 
 They have limits 150M/day/mac address. Let's fix it.
 
 ```js
-  write down your real-own mac address. Run
-  ⫸ ifconfig en0 | grep ether
-  Set new random mac *with real vendor*
-  ⫸ sudo ifconfig en0 ether 00:20:2f:bd:84:e2
-  turn off & on wifi
-  ⫸ networksetup -setairportpower en0 off
-  ⫸ networksetup -setairportpower en0 on
+
+    write down your real(own) mac address
+    ⫸ ifconfig en0 | grep ether
+    => your current mac address is 00:1e:d5:02:4a:8e
+    Set new random mac with real vendor
+    ⫸ sudo ifconfig en0 ether 58:e8:76:06:6c:8e
+    Turn Off & On wifi
+    ⫸ networksetup -setairportpower en0 off
+    ⫸ networksetup -setairportpower en0 on
+    
 ```
 
 Source of IEEE mac address
