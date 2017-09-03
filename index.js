@@ -17,13 +17,9 @@ for (let i = 0; i < userMac.length; i++) {
   userMac[i] = (Math.floor(Math.random()*16).toString(16));
 }
 
-let finalMac = [...randomValidVendorMac,...userMac]
+const finalMacArray = [...randomValidVendorMac,...userMac]
 
-let finalMacStr
-
-for (let i = 0; i < finalMac.length; i++) {
-  if (i % 2 === 1) finalMac[i] += ':'
-}
+const finalMacAddress = finalMacArray.map((n, i) => i % 2 ? n + ':' : n).join('').slice(0, -1);
 
 const { spawn } = require('child_process')
 const ifconfig = spawn('ifconfig', ['en0'])
@@ -65,7 +61,7 @@ console.log(`
   write down your real-own mac address. Run
   ⫸ ifconfig en0 | grep ether
   Set new random mac *with real vendor*
-  ⫸ sudo ifconfig en0 ether ${finalMac.join('').slice(0, -1)}
+  ⫸ sudo ifconfig en0 ether ${finalMacAddress}
   turn off & on wifi
   ⫸ networksetup -setairportpower en0 off
   ⫸ networksetup -setairportpower en0 on
