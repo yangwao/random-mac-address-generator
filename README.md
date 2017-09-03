@@ -3,7 +3,7 @@
 I've just been bored in Flixbus going from Vienna, so I made another random mac generator.
 They have limits 150M/day/mac address. Let's fix it.
 
-```js
+```
 
     write down your real(own) mac address
     ⫸ ifconfig en0 | grep ether
