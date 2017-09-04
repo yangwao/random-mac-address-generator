@@ -51,6 +51,7 @@ grep.stdout.on('data', (data) => {
     Turn Off & On wifi
     ⫸ networksetup -setairportpower en0 off
     ⫸ networksetup -setairportpower en0 on
+    ( optionally, run ⫸ sudo ./shake.sh ${finalMacAddress} )
   `)
 })
 
